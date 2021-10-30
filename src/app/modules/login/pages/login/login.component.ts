@@ -22,6 +22,14 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (this.authService.isAuthenticated()) {
+      Swal.fire(
+        'Login',
+        `${this.authService.employee.name}, you are authenticated!`,
+        'info'
+      );
+      this.router.navigate(['/dashboard']);
+    }
     this.form = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -56,6 +64,7 @@ export class LoginComponent implements OnInit {
           `Welcome ${employee.username}, login sucessfully`,
           'success'
         );
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         if (error.status == 400) {
