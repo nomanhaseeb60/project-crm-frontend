@@ -7,7 +7,7 @@ import { MaterialModule } from './material/material.module';
   declarations: [],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
   ]
 })
 export class SharedModule { }
