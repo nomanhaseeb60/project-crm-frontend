@@ -3,6 +3,5 @@ export class Employee {
   password: string;
   name?: string;
   surname?: string;
-  email?:string;
-  roles: string[] = [];
+  roles?: string[] = [];
 }

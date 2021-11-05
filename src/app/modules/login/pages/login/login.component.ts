@@ -19,19 +19,20 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated()) {
+      let employee = this.authService.employee;
       Swal.fire(
         'Login',
-        `${this.authService.employee.name}, you are authenticated!`,
+        `${employee.username.split('@')[0]}, you are authenticated!`,
         'info'
       );
       this.router.navigate(['/dashboard']);
     }
     this.form = this.fb.group({
-      username: ['', Validators.required],
+      username: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
     });
   }
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
       );
       return;
     }
-    //Username y pass tiene que estar rellenado
+
     this.employee = new Employee();
     this.employee.username = this.form.get('username').value;
     this.employee.password = this.form.get('password').value;

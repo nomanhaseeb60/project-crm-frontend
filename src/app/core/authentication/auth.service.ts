@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from 'src/app/shared/models/employee';
+import { BasicAuth } from '../services/basic-auth';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,8 @@ export class AuthService {
   private _employee: Employee;
   private _token: string;
 
-  constructor(private httpCliente: HttpClient) {}
+  constructor(private httpCliente: HttpClient,
+    private basicAuth: BasicAuth) {}
 
   public get employee(): Employee {
     if (this._employee != null) {
@@ -42,12 +44,7 @@ export class AuthService {
     //Datos para realizar el login en back
     const urlEndPoint = 'http://localhost:8080/oauth/token';
 
-    //encriptar en base64
-    const credencials = btoa('angularapp' + ':' + '12345');
-    const httpHeader = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: 'Basic ' + credencials,
-    });
+    const httpHeader = this.basicAuth.getHeadersLogin();
 
     //Enviar parametros para la autenticación
     let params = new URLSearchParams();
