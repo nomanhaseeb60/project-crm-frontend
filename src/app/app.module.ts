@@ -5,9 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material/material.module';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './core/guards/authGuard';
-import { SharedModule } from './shared/shared.module';
+import { SpinnerInterceptor } from './core/interceptors/spinner/spinner.interceptor';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,12 @@ import { SharedModule } from './shared/shared.module';
     MaterialModule
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SpinnerInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent]
 })
