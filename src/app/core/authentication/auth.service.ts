@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Employee } from 'src/app/shared/models/employee';
-import { BasicAuth } from '../services/basic-auth';
+import { BasicAuth } from './basic-auth';
 
 @Injectable({
   providedIn: 'root',
