@@ -21,4 +21,13 @@ export class AppComponent implements DoCheck {
     this.isLogged = this.authService.isAuthenticated();
     return this.isLogged;
   }
+
+  logOut(): void {
+    this.authService.logout();
+    Swal.fire({
+      title: 'Logged out',
+      text: 'You have been logged out',
+      icon: 'success',
+    });
+  }
 }

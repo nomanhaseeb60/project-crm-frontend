@@ -1,4 +1,4 @@
-import { Project } from "src/app/shared/models/Project";
+import { Project } from "src/app/shared/models/project";
 
 export class ProjectList {
   public static projects: Project[] = [

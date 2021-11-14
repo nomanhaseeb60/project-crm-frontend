@@ -1,1 +1,46 @@
-<h1>Welcome to the Customer Management</h1>
+<div class="flex justify-center items-center mt-4">
+  <table mat-table class="w-6/12" [dataSource]="dataSource">
+    <!-- Position Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="surname">
+      <th mat-header-cell *matHeaderCellDef> Surname </th>
+      <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="companyName">
+      <th mat-header-cell *matHeaderCellDef> Company </th>
+      <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef> details </th>
+      <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="warn" aria-label="Example icon button with a open in new tab icon">
+        <mat-icon>open_in_new</mat-icon>
+      </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<div class="flex justify-center items-center mt-4">
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+  </div>

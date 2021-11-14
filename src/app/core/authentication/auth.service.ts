@@ -1,5 +1,6 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Employee } from 'src/app/shared/models/employee';
 import { BasicAuth } from './basic-auth';
@@ -11,8 +12,7 @@ export class AuthService {
   private _employee: Employee;
   private _token: string;
 
-  constructor(private httpCliente: HttpClient,
-    private basicAuth: BasicAuth) {}
+  constructor(private httpCliente: HttpClient, private basicAuth: BasicAuth, private router: Router) {}
 
   public get employee(): Employee {
     if (this._employee != null) {
@@ -64,7 +64,7 @@ export class AuthService {
     this._employee.username = payload.user_name;
     this._employee.roles = payload.authorities;
 
-    //Guardar datos del usuario en el session storage
+    //Save Employee data in localStorage
     sessionStorage.setItem('employee', JSON.stringify(this._employee));
   }
 
@@ -87,4 +87,12 @@ export class AuthService {
     }
     return false;
   }
+
+  logout(): void {
+    this._employee = null;
+    this._token = null;
+    sessionStorage.clear();
+    this.router.navigate(['login']);
+  }
+
 }
